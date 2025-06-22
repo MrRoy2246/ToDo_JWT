@@ -16,3 +16,8 @@ class Task(models.Model):
 
                 then...
 .....................migrate and migrations..............
+
+add serializer----------------> we can add manually with serializers.serializer.but here i use serializers.Modelserializer.
+then add view urls.
+tasks----> createlistapiview also authenticate this.
+register---->Createapiview with in serializer because django authomatic check user duplicate etc
