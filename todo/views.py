@@ -3,7 +3,7 @@ from rest_framework.permissions import IsAuthenticated
 from .models import Task
 from .serializers import TaskSerializer,RegisterSerializer
 from django.contrib.auth.models import User
-
+from rest_framework import filters
 
 class RegisterView(CreateAPIView):
     queryset=User.objects.all()
@@ -12,6 +12,8 @@ class RegisterView(CreateAPIView):
 class MyTaskListCreateApiView(ListCreateAPIView):
     serializer_class = TaskSerializer
     permission_classes = [IsAuthenticated]  # Only authenticated users can access
+    filterset_fields = ['completed']  # ✅ allow ?completed=true
+    search_fields = ['title', 'description']  # ✅ allow ?search=read
     def get_queryset(self):
         # Only return tasks belonging to the logged-in user
         return Task.objects.filter(user=self.request.user)
